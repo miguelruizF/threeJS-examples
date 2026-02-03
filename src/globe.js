@@ -15,19 +15,14 @@ ctrls.enableDamping = true;
 
 const textureLoad = new THREE.TextureLoader();
 // const textureMaterial = textureLoad.load('../asset/textures/bricks.jpg');
-const textureMaterial = textureLoad.load('../asset/textures/colors.jpg', (texture) => {
+/* const textureMaterial = textureLoad.load('../asset/textures/colors.jpg', (texture) => {
     texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
     texture.repeat.set(8,1);
-});
+}); */
 
-//const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const geometry = new THREE.TorusKnotGeometry(1, 0.4, 256, 32);
+const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const material = new THREE.MeshStandardMaterial( { 
-    //color: 0x00ff00, 
-    map: textureMaterial,
-    normalScale: new THREE.Vector2(2,2),
-    metalness: .5,
-    roughness: 0
+    color: 0x00ff00, 
 } );
 
 const cube = new THREE.Mesh( geometry, material );
