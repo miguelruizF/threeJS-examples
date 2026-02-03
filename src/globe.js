@@ -1,10 +1,14 @@
 import * as THREE from 'three';
 import getLayer from "../asset/getLayer.js";
 import { OrbitControls } from "../node_modules/three/examples/jsm/controls/OrbitControls.js";
+import getStarfield from '../asset/getStartfield.js';
+import GeoJsonGeometry from 'three-geojson-geometry';
+import { LineSegments, LineBasicMaterial } from 'three';
 
 
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+scene.fog = new THREE.FogExp2(0x000000, 0.2);
+const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 100 );
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -13,27 +17,39 @@ document.body.appendChild( renderer.domElement );
 const ctrls = new OrbitControls(camera, renderer.domElement);
 ctrls.enableDamping = true;
 
-const textureLoad = new THREE.TextureLoader();
-// const textureMaterial = textureLoad.load('../asset/textures/bricks.jpg');
-/* const textureMaterial = textureLoad.load('../asset/textures/colors.jpg', (texture) => {
-    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
-    texture.repeat.set(8,1);
-}); */
-
-const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshStandardMaterial( { 
-    color: 0x00ff00, 
+const geometry = new THREE.SphereGeometry(2);
+const lineMat = new THREE.LineBasicMaterial( { 
+    color: 0xffffff,
+    transparent: true,
+    opacity: 0.25
 } );
+const edges = new THREE.EdgesGeometry(geometry, 1);
+const line = new THREE.LineSegments( edges, lineMat );
+scene.add( line );
 
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
+async function loadCountries() {
+  // Recomendado: poner el .geojson en `public/` y usar '/countries.geojson'
+    const res = await fetch('../asset/countries.json');
+    const world = await res.json();
 
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
-scene.add(hemiLight);
+    const mat = new LineBasicMaterial({ 
+        color: 0xffffff, 
+        opacity: 1, 
+        transparent: true,
+        linewidth: 2,
+        fog: true
+    });
+    const radius = 2;    // igual que tu SphereGeometry(2)
+    const resolution = 1; // grados; baja = más detaile, alto = menos vertices
 
-const keyLight = new THREE.DirectionalLight(0xffffff, 1);
-keyLight.position.set(-2, 2, 2);
-scene.add(keyLight); 
+    world.features.forEach(feature => {
+    const geom = new GeoJsonGeometry(feature.geometry, radius, resolution);
+    const lines = new LineSegments(geom, mat);
+    scene.add(lines);
+    });
+}
+
+loadCountries();
 
 // Sprites BG
 const gradientBackground = getLayer({
@@ -44,8 +60,9 @@ const gradientBackground = getLayer({
     size: 24,
     z: -15.5,
 });
-scene.add(gradientBackground);
-
+// scene.add(gradientBackground);
+const stars = getStarfield({ numStars: 1000 });
+scene.add(stars);
 
 camera.position.z = 5;
 
