@@ -19,11 +19,11 @@ You will need [Node.js](https://nodejs.org) (version 20.19+, 22.12+ recommended)
 
 1.  **Clone the repository:**
     ```bash
-    git clone [https://github.com/miguelruizF/threeJS-examples.git]
+    git clone https://github.com/miguelruizF/threeJS-examples.git
     ```
 2.  **Navigate into the project directory:**
     ```bash
-    cd [threeJS-examples]
+    cd threeJS-examples
     ```
 3.  **Install dependencies:**
     ```bash
