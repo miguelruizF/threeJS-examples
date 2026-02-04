@@ -46,6 +46,4 @@ npm run dev
 ## Projects
 
 ### Scene Project
-![Scene animation](asset/videos/scene.gif)
-
-*Nota: si el GIF no está presente, agrega `asset/videos/scene.gif` al repositorio.*
+<img src="asset/utilities/scene.gif" alt="Scene animation" width="280" />
