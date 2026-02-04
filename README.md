@@ -41,3 +41,9 @@ You will need [Node.js](https://nodejs.org) (version 20.19+, 22.12+ recommended)
 To start the local development server with Hot Module Replacement (HMR):
 ```bash
 npm run dev
+```
+
+## Projects
+
+### Scene Project
+![Vídeo de prueba](/asset/videos/scene.mp4)
