@@ -46,4 +46,7 @@ npm run dev
 ## Projects
 
 ### Scene Project
-<img src="asset/utilities/scene.gif" alt="Scene animation" width="280" />
+<img src="asset/gifs/scene.gif" alt="Scene animation" width="280" />
+
+### Globe Project
+<img src="asset/gifs/globe.gif" alt="Scene animation" width="280" />
