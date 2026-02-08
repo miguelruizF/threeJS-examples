@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import getLayer from "../asset/getLayer.js";
-import { OrbitControls } from "../node_modules/three/examples/jsm/controls/OrbitControls.js";
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import getStarfield from '../asset/getStartfield.js';
 import GeoJsonGeometry from 'three-geojson-geometry';
 import { LineSegments, LineBasicMaterial } from 'three';
@@ -12,7 +12,7 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
-document.body.appendChild( renderer.domElement );
+document.querySelector('#app')?.appendChild(renderer.domElement);
 
 const ctrls = new OrbitControls(camera, renderer.domElement);
 ctrls.enableDamping = true;
@@ -29,7 +29,7 @@ scene.add( line );
 
 async function loadCountries() {
   // Recomendado: poner el .geojson en `public/` y usar '/countries.geojson'
-    const res = await fetch('../asset/countries.json');
+    const res = await fetch('/countries.geojson');
     const world = await res.json();
 
     const mat = new LineBasicMaterial({ 
@@ -48,8 +48,8 @@ async function loadCountries() {
     scene.add(lines);
     });
 }
-
 loadCountries();
+
 
 // Sprites BG
 const gradientBackground = getLayer({
