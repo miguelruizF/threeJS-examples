@@ -50,3 +50,6 @@ npm run dev
 
 ### Globe Project
 <img src="asset/gifs/globe.gif" alt="Scene animation" width="280" />
+
+### Effects Project
+<img src="asset/gifs/effects.gif" alt="Scene animation" width="280" />
