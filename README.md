@@ -53,3 +53,6 @@ npm run dev
 
 ### Effects Project
 <img src="asset/gifs/effects.gif" alt="Scene animation" width="280" />
+
+### Scroll Effect
+<img src="asset/gifs/scroll.gif" alt="Scene animation" width="280" />
